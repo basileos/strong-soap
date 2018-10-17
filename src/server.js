@@ -238,7 +238,8 @@ class Server extends Base {
           args: body[messageElemName],
           headers: headers,
           style: 'document',
-          includeTimestamp: includeTimestamp
+          includeTimestamp: includeTimestamp,
+          xml: input
         }, req, callback);
       }
     } catch (error) {
@@ -261,6 +262,7 @@ class Server extends Base {
       args = options.args,
       style = options.style,
       includeTimestamp = options.includeTimestamp,
+      xml = options.xml,
       handled = false;
 
     try {
@@ -329,7 +331,7 @@ class Server extends Base {
       callback('');
     }
 
-    var result = operation(args, handleResult, options.headers, req);
+    var result = operation(args, handleResult, options.headers, req, options.xml);
     if (typeof result !== 'undefined') {
       handleResult(null, result);
     }
